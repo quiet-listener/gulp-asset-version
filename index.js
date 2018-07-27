@@ -16,18 +16,11 @@ var ASSET_REG = {
     "BACKGROUND": /(url\()(?!data:|about:)([^)]*)/ig
 };
 
-var version = 0;
-
-var createHash = function () {
-    version = Math.floor(Math.random() * 100000)+1000000;
-    return version
-};
-
 module.exports = function (options) {
     return through.obj(function (file, enc, cb) {
         options = options || {};
 
-        var hashLen = createHash();
+        var hashLen = options["version"] || "";
 
         if (file.isNull()) {
             this.push(file);
