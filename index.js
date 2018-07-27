@@ -20,7 +20,7 @@ module.exports = function (options) {
     return through.obj(function (file, enc, cb) {
         options = options || {};
 
-        var hashLen = options["version"] || "";
+        var version = options["version"] || "";
 
         if (file.isNull()) {
             this.push(file);
@@ -55,11 +55,11 @@ module.exports = function (options) {
                     if (/\?v=+/.test(src)){
                         console.log(src);
                         src = src.replace(/(&rand=)\w{7}/, '');
-                        src=src+"&rand="+hashLen;
+                        src=src+"&rand="+version;
                     }
                     else{
                         src = src.replace(/(\?rand=)\w{7}/, '');
-                        src=src+"?rand="+hashLen;
+                        src=src+"?rand="+version;
                     }                           
                     return tag + '"' + src + '"';
                 });
